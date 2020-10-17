@@ -1,0 +1,14 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+{% if latest_question_list %}
+	<ul>
+	{% for question in latest_question_list %}
+	{% comment %} bc we defined the name argument in the path() func in polls.url, we can soft-code this url in squiggly braces. polls:detail specifies that we want "detail" view from the "polls" app, specified in polls/urls.py	{% endcomment %}
+		<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No polls are available.</p>
+{% endif %}
